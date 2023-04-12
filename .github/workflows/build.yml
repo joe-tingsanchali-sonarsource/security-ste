@@ -37,7 +37,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=joe-tingsanchali-sonarsource_security-ste_AYdz0Qi27JfBKudP_G2m -X \
-          -Dsonar.security.sources.javasecurity.S3649=s3649JavaSqlInjectionConfig.json \
-          -Dsonar.security.sanitizers.javasecurity.S3649=s3649JavaSqlInjectionConfig.json \
+        run: >-
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.projectKey=joe-tingsanchali-sonarsource_security-ste_AYdz0Qi27JfBKudP_G2m
+          -X
+          -Dsonar.security.sources.javasecurity.S3649=s3649JavaSqlInjectionConfig.json
+          -Dsonar.security.sanitizers.javasecurity.S3649=s3649JavaSqlInjectionConfig.json
           -Dsonar.security.sinks.javasecurity.S3649=s3649JavaSqlInjectionConfig.json
