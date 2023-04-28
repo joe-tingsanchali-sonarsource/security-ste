@@ -19,6 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Insecure {
 
+  private static final String devAccountKey = "4dVw+lOw2My+FwuZ08dWXn+gHxcmBtS7esLAQSrm6/Om3jeyUKKGMkfAh38kWZlItThQYsg31v23A0w/uVP4pg==";
+
   public void badFunction(HttpServletRequest request) throws IOException {
     String obj = request.getParameter("data");
     ObjectMapper mapper = new ObjectMapper();
