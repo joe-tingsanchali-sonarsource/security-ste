@@ -25,7 +25,7 @@ public class Insecure {
   private void testVuln() {
     SecureRandom sr = new SecureRandom();
     sr.setSeed(123456L); // Noncompliant
-    int v = sr.next(32);
+    int v = sr.nextInt(32);
   }
 
   public void badFunction(HttpServletRequest request) throws IOException {
