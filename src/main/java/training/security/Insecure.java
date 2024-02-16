@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -19,7 +20,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Insecure {
 
-  private String devAccountKey2 = "DefaultEndpointsProtocol=https;AccountName=testaccountname;AccountKey=4dVw+l0W8My+FwuZ08dWXn+gHxcmBtS7esLAQSrm6/Om3jeyUKKGMkfAh38kWZlItThQYsg31v23A0w/uVP4pg==;EndpointSuffix=core.windows.net";
+//  private String devAccountKey2 = "DefaultEndpointsProtocol=https;AccountName=testaccountname;AccountKey=4dVw+l0W8My+FwuZ08dWXn+gHxcmBtS7esLAQSrm6/Om3jeyUKKGMkfAh38kWZlItThQYsg31v23A0w/uVP4pg==;EndpointSuffix=core.windows.net";
+
+  private void testVuln() {
+    SecureRandom sr = new SecureRandom();
+    sr.setSeed(123456L); // Noncompliant
+    int v = sr.next(32);
+  }
 
   public void badFunction(HttpServletRequest request) throws IOException {
     String obj = request.getParameter("data");
@@ -32,6 +39,8 @@ public class Insecure {
     tempDir.mkdir();
     Files.exists(Paths.get("/tmp/", obj));
   }
+
+
 
   public String taintedSQL(HttpServletRequest request, Connection connection) throws Exception {
     String user = request.getParameter("user");
